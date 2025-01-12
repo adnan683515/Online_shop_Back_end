@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import view_model,Brand,cetagory,country,colour,size,Team,MainMetariails,version
+from .models import view_model,Brand,cetagory,country,colour,size,Team,MainMetariails,version,TypeOFJacket
 from .serializer import ViewSerializer
-from man.serializer import CetagorySerializer,BrandSerializer
+from man.serializer import CetagorySerializer,BrandSerializer,TypeOfJacketsSerializer
 from .serializer import colorserializer,countryserializer,SizeSerializer
 from sports.serializer import TeamSerializer,MainMaterialSerializer,versionSerailizer
 
@@ -307,3 +307,40 @@ class VersionPost(APIView):
             return Response('Post done')
         else:
             return Response(sierlizer.errors)
+        
+class VersionPutDelete(APIView):
+    
+    def put(self,request,pk,format=None):
+        obj = version.objects.get(pk=pk)
+        serialier = versionSerailizer(obj,data=request.data)
+        if serialier.is_valid():
+            serialier.save()
+            return Response('Put Done')
+        else:
+            return Response(serialier.errors)
+    
+    def get(self,request,pk,format=None):
+        obj = version.objects.get(pk=pk)
+        seiralizer = versionSerailizer(obj)
+        return Response(seiralizer.data)
+    
+    def delete(self,request,pk,format=None):
+        obj = version.objects.get(pk=pk)
+        obj.delete()
+        return Response('Delete done')
+    
+    
+class TypeOfjaceketPost(APIView):
+    def get(self,request,format=None):
+        queryset = TypeOFJacket.objects.all()
+        serializer = TypeOfJacketsSerializer(queryset,many=True)
+        return Response(serializer.data)
+    
+    def post(self,request,format=None):
+        seirlalizer = TypeOfJacketsSerializer(data=request.data)
+        if TypeOFJacket.objects.filter(name=request.data['name']):
+            return Response('Already Exits')
+        if seirlalizer.is_valid():
+            seirlalizer.save()
+            return Response('Type of jacket Post Done')
+        return Response(seirlalizer.errors)

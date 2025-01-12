@@ -7,10 +7,6 @@ from add_to_cart.models import Order
 
 
 
-class PaymentView(APIView):
-    
-    def get(self,request,format=None):
-        obj = Order.objects.get()
     
         
         

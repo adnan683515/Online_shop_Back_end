@@ -6,7 +6,7 @@ class football_serializer(serializers.ModelSerializer):
     football_cetagory = serializers.CharField(read_only=True)
     class Meta:
         model = Product
-        exclude = ['Movement_Watch','Strap_metarail_watch','warenty_watch','size']
+        exclude = ['Movement_Watch','warenty_watch','size']
     
     
 class versionSerailizer(serializers.ModelSerializer):

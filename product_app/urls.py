@@ -25,5 +25,7 @@ urlpatterns = [
     path('teamputdelte/<int:pk>/',views.TeamNameDeleteAndPut.as_view()),
     path('mainmetarials/',views.MainMetarialsApiView.as_view()),
     path('editdeletemeta/<int:pk>/',views.EditMetaDelete.as_view()),
-    path('versionpost/',views.VersionPost.as_view())
+    path('versionpost/',views.VersionPost.as_view()),
+    path('versionputdelete/<int:pk>/',views.VersionPutDelete.as_view()),
+    path('TypeOfjaceketPost/',views.TypeOfjaceketPost.as_view())
     ]
